@@ -6,133 +6,268 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		15E1777BA4216A67571BF5BC /* AlbumPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E92B58D8F8DD5A24C318CD1 /* AlbumPickerView.swift */; };
+		3EC96F2C223143B9857A2B6F /* AppLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8701F3A267DE2CC7DE90A2 /* AppLayoutView.swift */; };
+		4EBF6F39DBE9D5DD7080458C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBF70D254F4AC20FB6044D8 /* OnboardingView.swift */; };
+		5258CAAC4D6DC5F62505D6D2 /* SukkiriApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591D3C39CF58825BD24231A5 /* SukkiriApp.swift */; };
+		58BADEDB80E8FE162348B792 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D85791B6D4F27F1F0DBBB5 /* HapticService.swift */; };
+		641A7F148581391E16D6E6A8 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6AB663CFB89222CBF3069A /* PhotoService.swift */; };
+		6D649C7E46E1840324657078 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B3ECD7ED13CD9A3DAD0773 /* MainTabView.swift */; };
+		78836BE4D677BFA3922C096F /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D2B810ABC7A6287809FA2E /* ResultView.swift */; };
+		7E67CB3280295EB872302D7B /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCA432CE89EF238C0D82F1C /* SwipeView.swift */; };
+		902B7ECEB7E25DA3470BC953 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3557E99AACE61638BC08D4E /* Assets.xcassets */; };
+		A9B80883F94F74FA020F9174 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5B209263F1E17E12973F3C /* DesignSystem.swift */; };
+		CB3D009AE20D4A3DFF7964F6 /* SwiftDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBB24EE03FE6EB44D55F3FE /* SwiftDataModels.swift */; };
+		F64BB930A6CC91AE522DE13B /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BB76B7668AEA63A9ABFD46 /* DashboardView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
-		2ECD946B2FBB60FB008B2FD8 /* Sukkiri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sukkiri.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		01BB76B7668AEA63A9ABFD46 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		0E92B58D8F8DD5A24C318CD1 /* AlbumPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPickerView.swift; sourceTree = "<group>"; };
+		11378A3D40902705DCB5B1CA /* Sukkiri.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Sukkiri.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		30B3ECD7ED13CD9A3DAD0773 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		36D2B810ABC7A6287809FA2E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		3CBB24EE03FE6EB44D55F3FE /* SwiftDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataModels.swift; sourceTree = "<group>"; };
+		4B6AB663CFB89222CBF3069A /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
+		591D3C39CF58825BD24231A5 /* SukkiriApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SukkiriApp.swift; sourceTree = "<group>"; };
+		60D85791B6D4F27F1F0DBBB5 /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
+		A3557E99AACE61638BC08D4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ADCA432CE89EF238C0D82F1C /* SwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
+		AEBF70D254F4AC20FB6044D8 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		AF8701F3A267DE2CC7DE90A2 /* AppLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLayoutView.swift; sourceTree = "<group>"; };
+		DC5B209263F1E17E12973F3C /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		2ECD946D2FBB60FB008B2FD8 /* Sukkiri */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
+/* Begin PBXGroup section */
+		128F816FBA7BD963432C2413 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				01BB76B7668AEA63A9ABFD46 /* DashboardView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		3CF47EFCFED7AE8A23860D57 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				60D85791B6D4F27F1F0DBBB5 /* HapticService.swift */,
+				4B6AB663CFB89222CBF3069A /* PhotoService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		41188DF184CDA0BEA29E6D2D /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				36D2B810ABC7A6287809FA2E /* ResultView.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
+		75D3DF25AFADB15DEEC558E9 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				DC5B209263F1E17E12973F3C /* DesignSystem.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		936B580652122D19CA91A43D /* Swipe */ = {
+			isa = PBXGroup;
+			children = (
+				0E92B58D8F8DD5A24C318CD1 /* AlbumPickerView.swift */,
+				ADCA432CE89EF238C0D82F1C /* SwipeView.swift */,
+			);
+			path = Swipe;
+			sourceTree = "<group>";
+		};
+		A96CEC128E8007DF042A304D = {
+			isa = PBXGroup;
+			children = (
+				D336847C4C428663BA92A197 /* Sukkiri */,
+				E126898478B4A51D8AE52600 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BAC165DF931C7DFBBF2EA22E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				AF8701F3A267DE2CC7DE90A2 /* AppLayoutView.swift */,
+				30B3ECD7ED13CD9A3DAD0773 /* MainTabView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		CDBAAF8461AF02C14AD1E79A /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				128F816FBA7BD963432C2413 /* Dashboard */,
+				BAC165DF931C7DFBBF2EA22E /* Main */,
+				D830FBBAAC4812A746F0DF14 /* Onboarding */,
+				41188DF184CDA0BEA29E6D2D /* Result */,
+				936B580652122D19CA91A43D /* Swipe */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		D336847C4C428663BA92A197 /* Sukkiri */ = {
+			isa = PBXGroup;
+			children = (
+				A3557E99AACE61638BC08D4E /* Assets.xcassets */,
+				591D3C39CF58825BD24231A5 /* SukkiriApp.swift */,
+				75D3DF25AFADB15DEEC558E9 /* DesignSystem */,
+				CDBAAF8461AF02C14AD1E79A /* Features */,
+				E6B9A3F38360176AD83AEE08 /* Models */,
+				3CF47EFCFED7AE8A23860D57 /* Services */,
+			);
 			path = Sukkiri;
 			sourceTree = "<group>";
 		};
-/* End PBXFileSystemSynchronizedRootGroup section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		2ECD94682FBB60FB008B2FD8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		2ECD94622FBB60FA008B2FD8 = {
+		D830FBBAAC4812A746F0DF14 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				2ECD946D2FBB60FB008B2FD8 /* Sukkiri */,
-				2ECD946C2FBB60FB008B2FD8 /* Products */,
+				AEBF70D254F4AC20FB6044D8 /* OnboardingView.swift */,
 			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		2ECD946C2FBB60FB008B2FD8 /* Products */ = {
+		E126898478B4A51D8AE52600 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2ECD946B2FBB60FB008B2FD8 /* Sukkiri.app */,
+				11378A3D40902705DCB5B1CA /* Sukkiri.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E6B9A3F38360176AD83AEE08 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3CBB24EE03FE6EB44D55F3FE /* SwiftDataModels.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2ECD946A2FBB60FB008B2FD8 /* Sukkiri */ = {
+		240B07C8FA54C16E55BEF65A /* Sukkiri */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2ECD94782FBB60FD008B2FD8 /* Build configuration list for PBXNativeTarget "Sukkiri" */;
+			buildConfigurationList = 89ACF9EC48A2DFFA341427CB /* Build configuration list for PBXNativeTarget "Sukkiri" */;
 			buildPhases = (
-				2ECD94672FBB60FB008B2FD8 /* Sources */,
-				2ECD94682FBB60FB008B2FD8 /* Frameworks */,
-				2ECD94692FBB60FB008B2FD8 /* Resources */,
+				752544D148D68AAAC3D483DA /* Sources */,
+				D5017B5CDC2060F1A00D3E00 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				2ECD946D2FBB60FB008B2FD8 /* Sukkiri */,
-			);
 			name = Sukkiri;
 			packageProductDependencies = (
 			);
 			productName = Sukkiri;
-			productReference = 2ECD946B2FBB60FB008B2FD8 /* Sukkiri.app */;
+			productReference = 11378A3D40902705DCB5B1CA /* Sukkiri.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		2ECD94632FBB60FA008B2FD8 /* Project object */ = {
+		7C4E27B2C73353368C8050CD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2650;
-				LastUpgradeCheck = 2650;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
-					2ECD946A2FBB60FB008B2FD8 = {
-						CreatedOnToolsVersion = 26.5;
+					240B07C8FA54C16E55BEF65A = {
+						DevelopmentTeam = "";
 					};
 				};
 			};
-			buildConfigurationList = 2ECD94662FBB60FA008B2FD8 /* Build configuration list for PBXProject "Sukkiri" */;
+			buildConfigurationList = 7CC5D00C2D9BD538FDCCABF0 /* Build configuration list for PBXProject "Sukkiri" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
-			mainGroup = 2ECD94622FBB60FA008B2FD8;
+			mainGroup = A96CEC128E8007DF042A304D;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 2ECD946C2FBB60FB008B2FD8 /* Products */;
+			productRefGroup = E126898478B4A51D8AE52600 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2ECD946A2FBB60FB008B2FD8 /* Sukkiri */,
+				240B07C8FA54C16E55BEF65A /* Sukkiri */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2ECD94692FBB60FB008B2FD8 /* Resources */ = {
+		D5017B5CDC2060F1A00D3E00 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				902B7ECEB7E25DA3470BC953 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2ECD94672FBB60FB008B2FD8 /* Sources */ = {
+		752544D148D68AAAC3D483DA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15E1777BA4216A67571BF5BC /* AlbumPickerView.swift in Sources */,
+				3EC96F2C223143B9857A2B6F /* AppLayoutView.swift in Sources */,
+				F64BB930A6CC91AE522DE13B /* DashboardView.swift in Sources */,
+				A9B80883F94F74FA020F9174 /* DesignSystem.swift in Sources */,
+				58BADEDB80E8FE162348B792 /* HapticService.swift in Sources */,
+				6D649C7E46E1840324657078 /* MainTabView.swift in Sources */,
+				4EBF6F39DBE9D5DD7080458C /* OnboardingView.swift in Sources */,
+				641A7F148581391E16D6E6A8 /* PhotoService.swift in Sources */,
+				78836BE4D677BFA3922C096F /* ResultView.swift in Sources */,
+				5258CAAC4D6DC5F62505D6D2 /* SukkiriApp.swift in Sources */,
+				CB3D009AE20D4A3DFF7964F6 /* SwiftDataModels.swift in Sources */,
+				7E67CB3280295EB872302D7B /* SwipeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		2ECD94762FBB60FD008B2FD8 /* Debug */ = {
+		19858C2A0A47804F58ED96FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sukkiri/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "写真ライブラリへの書き込みに使用します";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "スクリーンショットを整理するために写真へのアクセスが必要です";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kaiji417.sukkiri;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		645D41350D0086B5A9B2DFC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -160,16 +295,16 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
+					"DEBUG=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -177,23 +312,26 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
 			};
 			name = Debug;
 		};
-		2ECD94772FBB60FD008B2FD8 /* Release */ = {
+		BEC599E219913FF2AA80CBF3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -221,10 +359,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -232,119 +370,63 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
 			};
 			name = Release;
 		};
-		2ECD94792FBB60FD008B2FD8 /* Debug */ = {
+		DB85CFF693FE0A4093FCF6E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_APP_SANDBOX = YES;
-				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 26.3;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kaiji.Sukkiri;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				REGISTER_APP_GROUPS = YES;
-				SDKROOT = auto;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				INFOPLIST_FILE = Sukkiri/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "写真ライブラリへの書き込みに使用します";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "スクリーンショットを整理するために写真へのアクセスが必要です";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kaiji417.sukkiri;
+				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				XROS_DEPLOYMENT_TARGET = 26.5;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
-		};
-		2ECD947A2FBB60FD008B2FD8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_APP_SANDBOX = YES;
-				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
-				GENERATE_INFOPLIST_FILE = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 26.3;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kaiji.Sukkiri;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				REGISTER_APP_GROUPS = YES;
-				SDKROOT = auto;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				XROS_DEPLOYMENT_TARGET = 26.5;
-			};
-			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2ECD94662FBB60FA008B2FD8 /* Build configuration list for PBXProject "Sukkiri" */ = {
+		7CC5D00C2D9BD538FDCCABF0 /* Build configuration list for PBXProject "Sukkiri" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2ECD94762FBB60FD008B2FD8 /* Debug */,
-				2ECD94772FBB60FD008B2FD8 /* Release */,
+				645D41350D0086B5A9B2DFC0 /* Debug */,
+				BEC599E219913FF2AA80CBF3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		2ECD94782FBB60FD008B2FD8 /* Build configuration list for PBXNativeTarget "Sukkiri" */ = {
+		89ACF9EC48A2DFFA341427CB /* Build configuration list for PBXNativeTarget "Sukkiri" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2ECD94792FBB60FD008B2FD8 /* Debug */,
-				2ECD947A2FBB60FD008B2FD8 /* Release */,
+				DB85CFF693FE0A4093FCF6E1 /* Debug */,
+				19858C2A0A47804F58ED96FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 2ECD94632FBB60FA008B2FD8 /* Project object */;
+	rootObject = 7C4E27B2C73353368C8050CD /* Project object */;
 }
