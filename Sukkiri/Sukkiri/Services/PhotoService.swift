@@ -6,6 +6,8 @@ import UIKit
 protocol PhotoServiceProtocol {
     func requestAuthorization() async -> PHAuthorizationStatus
     func fetchScreenshots() async -> [PHAsset]
+    func fetchUnreviewedScreenshots(reviewedIDs: Set<String>, limit: Int) async -> [PHAsset]
+    func countUnreviewedScreenshots(reviewedIDs: Set<String>) async -> Int
     func fetchAssets(in collection: PHAssetCollection) async -> [PHAsset]
     func fetchUserAlbums() async -> [PHAssetCollection]
     func loadImage(for asset: PHAsset, targetSize: CGSize) async -> UIImage?
@@ -70,7 +72,7 @@ final class PhotoService: PhotoServiceProtocol {
             format: "mediaSubtype & %d != 0",
             PHAssetMediaSubtype.photoScreenshot.rawValue
         )
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         options.includeAssetSourceTypes = [.typeUserLibrary]
 
         let result = PHAsset.fetchAssets(with: .image, options: options)
@@ -79,9 +81,46 @@ final class PhotoService: PhotoServiceProtocol {
         return assets
     }
 
+    // 未レビューのスクショのみ、新しい順、最大 limit 枚
+    func fetchUnreviewedScreenshots(reviewedIDs: Set<String>, limit: Int) async -> [PHAsset] {
+        let options = PHFetchOptions()
+        options.predicate = NSPredicate(
+            format: "mediaSubtype & %d != 0",
+            PHAssetMediaSubtype.photoScreenshot.rawValue
+        )
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        options.includeAssetSourceTypes = [.typeUserLibrary]
+
+        let result = PHAsset.fetchAssets(with: .image, options: options)
+        var assets: [PHAsset] = []
+        result.enumerateObjects { asset, _, stop in
+            guard !reviewedIDs.contains(asset.localIdentifier) else { return }
+            assets.append(asset)
+            if assets.count >= limit { stop.pointee = true }
+        }
+        return assets
+    }
+
+    // 未レビューの総数カウント
+    func countUnreviewedScreenshots(reviewedIDs: Set<String>) async -> Int {
+        let options = PHFetchOptions()
+        options.predicate = NSPredicate(
+            format: "mediaSubtype & %d != 0",
+            PHAssetMediaSubtype.photoScreenshot.rawValue
+        )
+        options.includeAssetSourceTypes = [.typeUserLibrary]
+
+        let result = PHAsset.fetchAssets(with: .image, options: options)
+        var count = 0
+        result.enumerateObjects { asset, _, _ in
+            if !reviewedIDs.contains(asset.localIdentifier) { count += 1 }
+        }
+        return count
+    }
+
     func fetchAssets(in collection: PHAssetCollection) async -> [PHAsset] {
         let options = PHFetchOptions()
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
 
         let result = PHAsset.fetchAssets(in: collection, options: options)

@@ -3,6 +3,7 @@ import SwiftUI
 enum MainTabSelection: Hashable {
     case swipe
     case dashboard
+    case tools
 }
 
 struct AppLayoutView: View {
@@ -11,7 +12,6 @@ struct AppLayoutView: View {
 
     var body: some View {
         if horizontalSizeClass == .regular {
-            // iPad or large screen layout
             NavigationSplitView {
                 List(selection: $selection) {
                     NavigationLink(value: MainTabSelection.swipe) {
@@ -19,6 +19,9 @@ struct AppLayoutView: View {
                     }
                     NavigationLink(value: MainTabSelection.dashboard) {
                         Label("記録", systemImage: "chart.bar.xaxis")
+                    }
+                    NavigationLink(value: MainTabSelection.tools) {
+                        Label("ツール", systemImage: "wrench.and.screwdriver")
                     }
                 }
                 .navigationTitle("メニュー")
@@ -29,13 +32,14 @@ struct AppLayoutView: View {
                     MainSwipeView()
                 case .dashboard:
                     DashboardView()
+                case .tools:
+                    ToolsView()
                 case nil:
                     MainSwipeView()
                 }
             }
             .tint(Color.accent)
         } else {
-            // iPhone or compact screen layout
             MainTabView()
         }
     }

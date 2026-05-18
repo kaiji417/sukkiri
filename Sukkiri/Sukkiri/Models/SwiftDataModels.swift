@@ -6,9 +6,9 @@ import Foundation
 @Model
 final class SessionRecord {
     var date: Date
-    var reviewedCount: Int      // レビューした枚数
-    var deletedCount: Int       // 削除した枚数
-    var freedBytes: Int64       // 解放したバイト数
+    var reviewedCount: Int
+    var deletedCount: Int
+    var freedBytes: Int64
 
     init(date: Date = .now, reviewedCount: Int, deletedCount: Int, freedBytes: Int64) {
         self.date = date
@@ -24,22 +24,24 @@ final class SessionRecord {
 final class AppStats {
     var totalDeleted: Int
     var totalFreedBytes: Int64
-    var currentStreak: Int          // 連続日数
+    var currentStreak: Int
     var lastSessionDate: Date?
+    var isPastPhotosDigested: Bool
 
     init() {
         self.totalDeleted = 0
         self.totalFreedBytes = 0
         self.currentStreak = 0
         self.lastSessionDate = nil
+        self.isPastPhotosDigested = false
     }
 
-    /// セッション完了後に統計を更新する
-    func update(with session: SessionRecord) {
+    func update(with session: SessionRecord, digested: Bool) {
         totalDeleted += session.deletedCount
         totalFreedBytes += session.freedBytes
         updateStreak(sessionDate: session.date)
         lastSessionDate = session.date
+        if digested { isPastPhotosDigested = true }
     }
 
     private func updateStreak(sessionDate: Date) {
@@ -47,21 +49,25 @@ final class AppStats {
             currentStreak = 1
             return
         }
-
         let calendar = Calendar.current
         let lastDay = calendar.startOfDay(for: last)
         let today = calendar.startOfDay(for: sessionDate)
         let diff = calendar.dateComponents([.day], from: lastDay, to: today).day ?? 0
-
         switch diff {
-        case 0:
-            // 同日は継続（カウントしない）
-            break
-        case 1:
-            currentStreak += 1
-        default:
-            // 途切れた
-            currentStreak = 1
+        case 0: break
+        case 1: currentStreak += 1
+        default: currentStreak = 1
         }
+    }
+}
+
+// MARK: - UserDefaults helper（レビュー済みアセットID管理）
+
+extension UserDefaults {
+    private static let reviewedKey = "sukkiri.reviewedAssetIDs"
+
+    var reviewedScreenshotIDs: Set<String> {
+        get { Set((array(forKey: Self.reviewedKey) as? [String]) ?? []) }
+        set { set(Array(newValue), forKey: Self.reviewedKey) }
     }
 }

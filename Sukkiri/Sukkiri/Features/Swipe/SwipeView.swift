@@ -1,5 +1,6 @@
 import SwiftUI
 import Photos
+import SwiftData
 
 // MARK: - スワイプ方向
 
@@ -13,6 +14,8 @@ enum SwipeDirection {
 @Observable
 final class SwipeViewModel {
 
+    static let dailyLimit = 30
+
     var assets: [PHAsset] = []
     var currentIndex: Int = 0
     var isLoading = true
@@ -22,7 +25,9 @@ final class SwipeViewModel {
     var deleteCandidates: [PHAsset] = []
     var keptCount: Int = 0
 
-    // MARK: Undo & Prefetch state
+    // 今セッションでレビューしたアセットID（スワイプ完了後にUserDefaultsへ反映）
+    private(set) var sessionReviewedIDs: Set<String> = []
+
     struct SwipeAction {
         let direction: SwipeDirection
         let asset: PHAsset
@@ -36,7 +41,6 @@ final class SwipeViewModel {
     var showAlbumPicker = false
     var sessionResult: SessionResult?
 
-    // フォルダ選択：デフォルトはスクショ
     var photoSource: PhotoSource = .screenshots
 
     private let photoService: PhotoServiceProtocol
@@ -53,9 +57,9 @@ final class SwipeViewModel {
         self.photoService = photoService
     }
 
-    // MARK: ロード（ソースに応じて切り替え）
+    // MARK: ロード
 
-    func loadAssets() async {
+    func loadAssets(reviewedIDs: Set<String> = []) async {
         isLoading = true
         currentIndex = 0
         deleteCandidates = []
@@ -63,10 +67,14 @@ final class SwipeViewModel {
         currentImage = nil
         lastAction = nil
         nextImageCache = nil
+        sessionReviewedIDs = []
 
         switch photoSource {
         case .screenshots:
-            assets = await photoService.fetchScreenshots()
+            assets = await photoService.fetchUnreviewedScreenshots(
+                reviewedIDs: reviewedIDs,
+                limit: Self.dailyLimit
+            )
         case .album(let collection):
             assets = await photoService.fetchAssets(in: collection)
         }
@@ -75,11 +83,10 @@ final class SwipeViewModel {
         await loadCurrentImage()
     }
 
-    // フォルダ変更時にリセットして再ロード
-    func changeSource(_ newSource: PhotoSource) async {
+    func changeSource(_ newSource: PhotoSource, reviewedIDs: Set<String> = []) async {
         guard newSource != photoSource else { return }
         photoSource = newSource
-        await loadAssets()
+        await loadAssets(reviewedIDs: reviewedIDs)
     }
 
     // MARK: スワイプ処理
@@ -87,6 +94,7 @@ final class SwipeViewModel {
     func swipe(_ direction: SwipeDirection) async {
         guard let currentAsset = current else { return }
 
+        sessionReviewedIDs.insert(currentAsset.localIdentifier)
         lastAction = SwipeAction(direction: direction, asset: currentAsset)
 
         switch direction {
@@ -110,16 +118,16 @@ final class SwipeViewModel {
             width: UIScreen.main.bounds.width * scale,
             height: UIScreen.main.bounds.height * scale
         )
-        
+
         if let cached = nextImageCache {
             currentImage = cached
             nextImageCache = nil
         } else {
             currentImage = await photoService.loadImage(for: asset, targetSize: size)
         }
-        
+
         isLoadingImage = false
-        
+
         if let nextAsset = assets[safe: currentIndex + 1] {
             Task {
                 nextImageCache = await photoService.loadImage(for: nextAsset, targetSize: size)
@@ -134,16 +142,17 @@ final class SwipeViewModel {
     func undo() {
         guard let action = lastAction, currentIndex > 0 else { return }
         currentIndex -= 1
-        
+
         switch action.direction {
         case .keep:
             keptCount = max(0, keptCount - 1)
         case .delete:
-            if let lastIndex = deleteCandidates.lastIndex(where: { $0.localIdentifier == action.asset.localIdentifier }) {
-                deleteCandidates.remove(at: lastIndex)
+            if let idx = deleteCandidates.lastIndex(where: { $0.localIdentifier == action.asset.localIdentifier }) {
+                deleteCandidates.remove(at: idx)
             }
         }
-        
+
+        sessionReviewedIDs.remove(action.asset.localIdentifier)
         nextImageCache = nil
         lastAction = nil
         Task { await loadCurrentImage() }
@@ -179,6 +188,12 @@ final class SwipeViewModel {
         )
         showResult = true
     }
+
+    // MARK: 未レビュー数カウント（省エネモード通知用）
+
+    func countRemaining(reviewedIDs: Set<String>) async -> Int {
+        await photoService.countUnreviewedScreenshots(reviewedIDs: reviewedIDs)
+    }
 }
 
 // MARK: - セッション結果 DTO
@@ -189,6 +204,71 @@ struct SessionResult {
     let freedBytes: Int64
 }
 
+// MARK: - 紙吹雪ビュー
+
+struct ConfettiView: View {
+
+    struct Particle {
+        var x: CGFloat
+        var startY: CGFloat
+        var speed: CGFloat
+        var rotSpeed: Double
+        var color: Color
+        var width: CGFloat
+        var height: CGFloat
+        var isCircle: Bool
+    }
+
+    @State private var particles: [Particle] = []
+    @State private var startDate = Date.now
+
+    var body: some View {
+        TimelineView(.animation) { timeline in
+            let t = timeline.date.timeIntervalSince(startDate)
+            Canvas { ctx, size in
+                for p in particles {
+                    let x = p.x * size.width
+                    let rawY = p.startY * size.height + CGFloat(t) * p.speed * size.height
+                    let cycleH = size.height * 1.6
+                    let y = rawY.truncatingRemainder(dividingBy: cycleH)
+                    guard y < size.height + 20 else { continue }
+
+                    let angle = Angle.degrees(t * p.rotSpeed)
+                    let path: Path = p.isCircle
+                        ? Path(ellipseIn: CGRect(x: -p.width/2, y: -p.height/2, width: p.width, height: p.width))
+                        : Path(CGRect(x: -p.width/2, y: -p.height/2, width: p.width, height: p.height))
+
+                    ctx.drawLayer { c in
+                        c.translateBy(x: x, y: y)
+                        c.rotate(by: angle)
+                        c.fill(path, with: .color(p.color))
+                    }
+                }
+            }
+        }
+        .allowsHitTesting(false)
+        .ignoresSafeArea()
+        .onAppear {
+            startDate = .now
+            guard particles.isEmpty else { return }
+            let colors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple, .pink,
+                                   .cyan, .mint, Color(red: 0.29, green: 0.50, blue: 0.65)]
+            particles = (0..<120).map { _ in
+                Particle(
+                    x: .random(in: 0.02...0.98),
+                    startY: .random(in: -0.6 ... -0.02),
+                    speed: .random(in: 0.15...0.4),
+                    rotSpeed: Double.random(in: 100...360) * (Bool.random() ? 1 : -1),
+                    color: colors.randomElement()!,
+                    width: .random(in: 8...14),
+                    height: .random(in: 4...8),
+                    isCircle: Bool.random()
+                )
+            }
+        }
+    }
+}
+
 // MARK: - メインスワイプ画面
 
 struct MainSwipeView: View {
@@ -197,12 +277,33 @@ struct MainSwipeView: View {
     @State private var dragOffset: CGSize = .zero
     private let swipeThreshold: CGFloat = 80
 
+    // 毎日セッション管理
+    @AppStorage("lastDailySessionTimestamp") private var lastDailySessionTimestamp: Double = 0
+    @AppStorage("isPastPhotosDigested") private var isPastPhotosDigested: Bool = false
+
+    // セッション完了後の処理済みフラグ（二重実行防止）
+    @State private var didHandleCompletion = false
+
+    @Environment(\.modelContext) private var modelContext
+
+    private var isTodayComplete: Bool {
+        guard lastDailySessionTimestamp > 0 else { return false }
+        let date = Date(timeIntervalSince1970: lastDailySessionTimestamp)
+        return Calendar.current.isDateInToday(date)
+    }
+
+    private var reviewedIDs: Set<String> {
+        UserDefaults.standard.reviewedScreenshotIDs
+    }
+
     var body: some View {
         NavigationStack {
             ZStack {
                 Color.appBackground.ignoresSafeArea()
 
-                if viewModel.isLoading {
+                if isTodayComplete {
+                    todayCompleteView
+                } else if viewModel.isLoading {
                     loadingView
                 } else if viewModel.assets.isEmpty {
                     emptyView
@@ -213,12 +314,15 @@ struct MainSwipeView: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar { toolbarContent }
+            .toolbar {
+                if !isTodayComplete && !viewModel.isLoading && viewModel.remaining > 0 {
+                    toolbarContent
+                }
+            }
         }
-        .task { await viewModel.loadAssets() }
-        // フォルダ切り替え時にアセットをリロード
+        .task { await viewModel.loadAssets(reviewedIDs: reviewedIDs) }
         .onChange(of: viewModel.photoSource) { _, newSource in
-            Task { await viewModel.changeSource(newSource) }
+            Task { await viewModel.changeSource(newSource, reviewedIDs: reviewedIDs) }
         }
         .sheet(isPresented: $viewModel.showAlbumPicker) {
             AlbumPickerView(selectedSource: $viewModel.photoSource)
@@ -240,6 +344,23 @@ struct MainSwipeView: View {
                 ResultView(result: result)
             }
         }
+    }
+
+    // MARK: 今日は完了済み画面
+
+    private var todayCompleteView: some View {
+        VStack(spacing: Spacing.xl) {
+            Image(systemName: "moon.stars")
+                .font(.system(size: 56, weight: .thin))
+                .foregroundStyle(Color.accent)
+            Text("今日の分はすべて完了しています！")
+                .font(.sukkiriTitle)
+                .multilineTextAlignment(.center)
+            Text("また明日お会いしましょう")
+                .font(.sukkiriBody)
+                .foregroundStyle(.secondary)
+        }
+        .padding(Spacing.xl)
     }
 
     // MARK: メインコンテンツ
@@ -357,9 +478,7 @@ struct MainSwipeView: View {
     private var dragGesture: some Gesture {
         DragGesture()
             .onChanged { value in
-                if dragOffset == .zero {
-                    viewModel.prepareHaptics()
-                }
+                if dragOffset == .zero { viewModel.prepareHaptics() }
                 dragOffset = value.translation
             }
             .onEnded { value in
@@ -392,35 +511,56 @@ struct MainSwipeView: View {
 
     private var emptyView: some View {
         VStack(spacing: Spacing.lg) {
-            Image(systemName: "photo.badge.checkmark")
+            Image(systemName: isPastPhotosDigested ? "sparkles" : "photo.badge.checkmark")
                 .font(.system(size: 56, weight: .thin)).foregroundStyle(Color.accent)
-            Text("\(viewModel.photoSource.displayName)に写真がありません")
+            Text(isPastPhotosDigested
+                 ? "スクショはすべてスッキリ済み！"
+                 : "\(viewModel.photoSource.displayName)に写真がありません")
                 .font(.sukkiriTitle)
-            Text("別のフォルダを選んでみましょう")
+                .multilineTextAlignment(.center)
+            Text(isPastPhotosDigested
+                 ? "10枚溜まったらお知らせします"
+                 : "別のフォルダを選んでみましょう")
                 .font(.sukkiriCaption).foregroundStyle(.secondary)
-            Button("フォルダを変更") { viewModel.showAlbumPicker = true }
-                .font(.sukkiriCaption).foregroundStyle(Color.accent)
+            if !isPastPhotosDigested {
+                Button("フォルダを変更") { viewModel.showAlbumPicker = true }
+                    .font(.sukkiriCaption).foregroundStyle(Color.accent)
+            }
         }
         .multilineTextAlignment(.center)
+        .padding(Spacing.xl)
     }
 
     private var allDonePrompt: some View {
-        VStack(spacing: Spacing.xl) {
-            Image(systemName: "checkmark.circle")
-                .font(.system(size: 56, weight: .thin)).foregroundStyle(Color.accent)
-            Text("全部チェックしました！").font(.sukkiriTitle)
-            Text("削除予定: \(viewModel.deleteCandidates.count) 枚")
-                .font(.sukkiriBody).foregroundStyle(.secondary)
-            Button {
-                viewModel.endSession()
-            } label: {
-                Text("セッションを終了する")
-                    .font(.sukkiriBody.weight(.medium))
-                    .frame(maxWidth: .infinity).padding(.vertical, Spacing.md)
-                    .background(Color.accent).foregroundStyle(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 14))
+        ZStack {
+            ConfettiView()
+
+            VStack(spacing: Spacing.xl) {
+                Spacer()
+                VStack(spacing: Spacing.md) {
+                    Text("🎉").font(.system(size: 64))
+                    Text("今日もスッキリ！").font(.sukkiriTitle)
+                    Text("削除予定: \(viewModel.deleteCandidates.count) 枚")
+                        .font(.sukkiriBody).foregroundStyle(.secondary)
+                }
+                Spacer()
+                Button {
+                    viewModel.endSession()
+                } label: {
+                    Text("セッションを終了する")
+                        .font(.sukkiriBody.weight(.medium))
+                        .frame(maxWidth: .infinity).padding(.vertical, Spacing.md)
+                        .background(Color.accent).foregroundStyle(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                }
+                .padding(.horizontal, Spacing.xl)
+                .padding(.bottom, Spacing.xl)
             }
-            .padding(.horizontal, Spacing.xl)
+        }
+        .task {
+            guard !didHandleCompletion else { return }
+            didHandleCompletion = true
+            await handleDailySessionComplete()
         }
     }
 
@@ -428,11 +568,8 @@ struct MainSwipeView: View {
 
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
-        // フォルダ名をタップするとアルバム選択シートを開く
         ToolbarItem(placement: .principal) {
-            Button {
-                viewModel.showAlbumPicker = true
-            } label: {
+            Button { viewModel.showAlbumPicker = true } label: {
                 HStack(spacing: 4) {
                     Text(viewModel.photoSource.displayName)
                         .font(.sukkiriBody.weight(.semibold))
@@ -454,6 +591,40 @@ struct MainSwipeView: View {
         ToolbarItem(placement: .topBarTrailing) {
             Button("今日はここまで") { viewModel.endSession() }
                 .font(.sukkiriCaption).foregroundStyle(Color.accent)
+        }
+    }
+
+    // MARK: セッション完了処理
+
+    private func handleDailySessionComplete() async {
+        // 今セッションでレビューしたIDをUserDefaultsに保存
+        var ids = reviewedIDs
+        ids.formUnion(viewModel.sessionReviewedIDs)
+        UserDefaults.standard.reviewedScreenshotIDs = ids
+
+        // 日付を保存（今日は完了扱い）
+        lastDailySessionTimestamp = Date.now.timeIntervalSince1970
+
+        // 未レビュー残数を確認
+        let remaining = await viewModel.countRemaining(reviewedIDs: ids)
+        let isNowDigested = remaining == 0
+
+        if isNowDigested && !isPastPhotosDigested {
+            isPastPhotosDigested = true
+            // AppStats にも反映
+            updateDigestedInAppStats()
+        }
+
+        // 省エネモードの場合は通知をスケジュール
+        if isPastPhotosDigested {
+            await NotificationService.shared.scheduleIfNeeded(unreviewedCount: remaining)
+        }
+    }
+
+    private func updateDigestedInAppStats() {
+        let descriptor = FetchDescriptor<AppStats>()
+        if let stats = (try? modelContext.fetch(descriptor))?.first {
+            stats.isPastPhotosDigested = true
         }
     }
 }

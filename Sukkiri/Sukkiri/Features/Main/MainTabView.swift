@@ -7,10 +7,15 @@ struct MainTabView: View {
                 .tabItem {
                     Label("スワイプ", systemImage: "square.stack")
                 }
-            
+
             DashboardView()
                 .tabItem {
                     Label("記録", systemImage: "chart.bar.xaxis")
+                }
+
+            ToolsView()
+                .tabItem {
+                    Label("ツール", systemImage: "wrench.and.screwdriver")
                 }
         }
         .tint(Color.accent)

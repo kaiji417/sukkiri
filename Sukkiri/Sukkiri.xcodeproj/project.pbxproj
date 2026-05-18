@@ -12,6 +12,7 @@
 		4EBF6F39DBE9D5DD7080458C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBF70D254F4AC20FB6044D8 /* OnboardingView.swift */; };
 		5258CAAC4D6DC5F62505D6D2 /* SukkiriApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591D3C39CF58825BD24231A5 /* SukkiriApp.swift */; };
 		58BADEDB80E8FE162348B792 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D85791B6D4F27F1F0DBBB5 /* HapticService.swift */; };
+		618A9601CE2670E41EA25732 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593782A279A01E4E0F7DE9F /* NotificationService.swift */; };
 		641A7F148581391E16D6E6A8 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6AB663CFB89222CBF3069A /* PhotoService.swift */; };
 		6D649C7E46E1840324657078 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B3ECD7ED13CD9A3DAD0773 /* MainTabView.swift */; };
 		78836BE4D677BFA3922C096F /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D2B810ABC7A6287809FA2E /* ResultView.swift */; };
@@ -20,6 +21,7 @@
 		A9B80883F94F74FA020F9174 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5B209263F1E17E12973F3C /* DesignSystem.swift */; };
 		CB3D009AE20D4A3DFF7964F6 /* SwiftDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBB24EE03FE6EB44D55F3FE /* SwiftDataModels.swift */; };
 		F64BB930A6CC91AE522DE13B /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BB76B7668AEA63A9ABFD46 /* DashboardView.swift */; };
+		FB5C6B2C37F414C5E4CA4298 /* ToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020918E6DE9EA4BFDD58295 /* ToolsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		4B6AB663CFB89222CBF3069A /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		591D3C39CF58825BD24231A5 /* SukkiriApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SukkiriApp.swift; sourceTree = "<group>"; };
 		60D85791B6D4F27F1F0DBBB5 /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
+		6593782A279A01E4E0F7DE9F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		8020918E6DE9EA4BFDD58295 /* ToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsView.swift; sourceTree = "<group>"; };
 		A3557E99AACE61638BC08D4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADCA432CE89EF238C0D82F1C /* SwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
 		AEBF70D254F4AC20FB6044D8 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -52,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				60D85791B6D4F27F1F0DBBB5 /* HapticService.swift */,
+				6593782A279A01E4E0F7DE9F /* NotificationService.swift */,
 				4B6AB663CFB89222CBF3069A /* PhotoService.swift */,
 			);
 			path = Services;
@@ -63,6 +68,14 @@
 				36D2B810ABC7A6287809FA2E /* ResultView.swift */,
 			);
 			path = Result;
+			sourceTree = "<group>";
+		};
+		6F34620BA34C2F66761341A5 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				8020918E6DE9EA4BFDD58295 /* ToolsView.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		75D3DF25AFADB15DEEC558E9 /* DesignSystem */ = {
@@ -107,6 +120,7 @@
 				D830FBBAAC4812A746F0DF14 /* Onboarding */,
 				41188DF184CDA0BEA29E6D2D /* Result */,
 				936B580652122D19CA91A43D /* Swipe */,
+				6F34620BA34C2F66761341A5 /* Tools */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -224,12 +238,14 @@
 				A9B80883F94F74FA020F9174 /* DesignSystem.swift in Sources */,
 				58BADEDB80E8FE162348B792 /* HapticService.swift in Sources */,
 				6D649C7E46E1840324657078 /* MainTabView.swift in Sources */,
+				618A9601CE2670E41EA25732 /* NotificationService.swift in Sources */,
 				4EBF6F39DBE9D5DD7080458C /* OnboardingView.swift in Sources */,
 				641A7F148581391E16D6E6A8 /* PhotoService.swift in Sources */,
 				78836BE4D677BFA3922C096F /* ResultView.swift in Sources */,
 				5258CAAC4D6DC5F62505D6D2 /* SukkiriApp.swift in Sources */,
 				CB3D009AE20D4A3DFF7964F6 /* SwiftDataModels.swift in Sources */,
 				7E67CB3280295EB872302D7B /* SwipeView.swift in Sources */,
+				FB5C6B2C37F414C5E4CA4298 /* ToolsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
