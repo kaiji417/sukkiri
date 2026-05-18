@@ -243,7 +243,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Sukkiri/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "写真ライブラリへの書き込みに使用します";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "スクリーンショットを整理するために写真へのアクセスが必要です";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -388,7 +387,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Sukkiri/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "写真ライブラリへの書き込みに使用します";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "スクリーンショットを整理するために写真へのアクセスが必要です";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
