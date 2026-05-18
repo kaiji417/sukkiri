@@ -21,8 +21,12 @@ struct ResultView: View {
                 Spacer()
 
                 // 結果ヘッダー
-                VStack(spacing: Spacing.sm) {
-                    Text("お疲れさまでした 🎉")
+                VStack(spacing: Spacing.md) {
+                    Image(systemName: "sparkles")
+                        .font(.system(size: 48, weight: .ultraLight))
+                        .foregroundStyle(Color.accent)
+
+                    Text("お疲れさまでした")
                         .font(.sukkiriTitle)
 
                     Text("今日のセッション")
@@ -113,6 +117,7 @@ struct ResultView: View {
             return s
         }()
         stats.update(with: record)
+        try? modelContext.save()
     }
 
     // MARK: シェア画像生成

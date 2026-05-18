@@ -1,6 +1,5 @@
 import SwiftUI
 import Photos
-import SwiftData
 
 // MARK: - スワイプ方向
 
@@ -284,8 +283,6 @@ struct MainSwipeView: View {
     // セッション完了後の処理済みフラグ（二重実行防止）
     @State private var didHandleCompletion = false
 
-    @Environment(\.modelContext) private var modelContext
-
     private var isTodayComplete: Bool {
         guard lastDailySessionTimestamp > 0 else { return false }
         let date = Date(timeIntervalSince1970: lastDailySessionTimestamp)
@@ -538,7 +535,9 @@ struct MainSwipeView: View {
             VStack(spacing: Spacing.xl) {
                 Spacer()
                 VStack(spacing: Spacing.md) {
-                    Text("🎉").font(.system(size: 64))
+                    Image(systemName: "checkmark.seal")
+                        .font(.system(size: 64, weight: .ultraLight))
+                        .foregroundStyle(Color.accent)
                     Text("今日もスッキリ！").font(.sukkiriTitle)
                     Text("削除予定: \(viewModel.deleteCandidates.count) 枚")
                         .font(.sukkiriBody).foregroundStyle(.secondary)
@@ -611,8 +610,6 @@ struct MainSwipeView: View {
 
         if isNowDigested && !isPastPhotosDigested {
             isPastPhotosDigested = true
-            // AppStats にも反映
-            updateDigestedInAppStats()
         }
 
         // 省エネモードの場合は通知をスケジュール
@@ -621,12 +618,7 @@ struct MainSwipeView: View {
         }
     }
 
-    private func updateDigestedInAppStats() {
-        let descriptor = FetchDescriptor<AppStats>()
-        if let stats = (try? modelContext.fetch(descriptor))?.first {
-            stats.isPastPhotosDigested = true
-        }
-    }
+
 }
 
 // MARK: - Array 安全アクセス

@@ -26,22 +26,19 @@ final class AppStats {
     var totalFreedBytes: Int64
     var currentStreak: Int
     var lastSessionDate: Date?
-    var isPastPhotosDigested: Bool
 
     init() {
         self.totalDeleted = 0
         self.totalFreedBytes = 0
         self.currentStreak = 0
         self.lastSessionDate = nil
-        self.isPastPhotosDigested = false
     }
 
-    func update(with session: SessionRecord, digested: Bool) {
+    func update(with session: SessionRecord) {
         totalDeleted += session.deletedCount
         totalFreedBytes += session.freedBytes
         updateStreak(sessionDate: session.date)
         lastSessionDate = session.date
-        if digested { isPastPhotosDigested = true }
     }
 
     private func updateStreak(sessionDate: Date) {

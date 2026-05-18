@@ -25,6 +25,7 @@ final class OnboardingViewModel {
         let status = await photoService.requestAuthorization()
         switch status {
         case .authorized, .limited:
+            await NotificationService.shared.requestAuthorization()
             state = .authorized
         default:
             state = .denied

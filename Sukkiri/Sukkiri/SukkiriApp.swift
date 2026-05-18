@@ -7,9 +7,6 @@ struct SukkiriApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-                .task {
-                    await NotificationService.shared.requestAuthorization()
-                }
         }
         .modelContainer(for: [SessionRecord.self, AppStats.self])
     }
