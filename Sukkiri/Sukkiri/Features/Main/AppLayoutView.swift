@@ -7,7 +7,7 @@ enum MainTabSelection: Hashable {
 
 struct AppLayoutView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    @State private var selection: MainTabSelection = .swipe
+    @State private var selection: MainTabSelection?
 
     var body: some View {
         if horizontalSizeClass == .regular {
@@ -29,6 +29,8 @@ struct AppLayoutView: View {
                     MainSwipeView()
                 case .dashboard:
                     DashboardView()
+                case nil:
+                    MainSwipeView()
                 }
             }
             .tint(Color.accent)
